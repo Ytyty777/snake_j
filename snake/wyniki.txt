@@ -12438,3 +12438,11 @@ Status:Przegrałeś Gracz: 0, AI1: 2, AI2: 0
 Status:Przegrałeś Gracz: 21, AI1: 2, AI2: 6
 Status:Wygrałeś Gracz: 0, AI1: 0, AI2: 0
 Status:Wygrałeś Gracz: 0, AI1: 1, AI2: 0
+Status:Przegrałeś Gracz: 0, AI1: 2, AI2: 1
+Status:Przegrałeś Gracz: 0, AI1: 2, AI2: 1
+Status:Wygrałeś Gracz: 0, AI1: 1, AI2: 0
+Status:Przegrałeś Gracz: 0, AI1: 1, AI2: 1
+Status:Przegrałeś Gracz: 0, AI1: 1, AI2: 1
+Status:Wygrałeś Gracz: 0, AI1: 0, AI2: 0
+Status:Wygrałeś Gracz: 0, AI1: 1, AI2: 0
+Status:Wygrałeś Gracz: 0, AI1: 0, AI2: 1

@@ -25,7 +25,7 @@ public class SnakeGame extends JFrame {
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     GamePanel gamePanel = new GamePanel();
     add(gamePanel);
-    pack(); // <-- automatyczny rozmiar ramki
+    pack(); 
     setVisible(true);
 }
     public static void main(String[] args) {
@@ -106,7 +106,7 @@ class GamePanel extends JPanel implements ActionListener, KeyListener {
             //Random rand = new Random();
             while (true) {
                 try {
-                    Thread.sleep(3000); // Co 3s sprawdzamy
+                    Thread.sleep(3000); 
                 } catch (InterruptedException ignored) {}
 
                 if (food == null) {
@@ -122,7 +122,7 @@ class GamePanel extends JPanel implements ActionListener, KeyListener {
     try (Scanner sc = new Scanner(new File("wyniki.txt"))) {
         while (sc.hasNextLine()) {
             String line = sc.nextLine();
-            // Szukamy "Gracz: X"
+            
             if (line.contains("Gracz:")) {
                 String[] parts = line.split(",");
                 String playerPart = parts[0]; // "Gracz: X"
@@ -184,7 +184,7 @@ class GamePanel extends JPanel implements ActionListener, KeyListener {
     Point dir = directions[rand.nextInt(directions.length)];
     Point newPoint = new Point(movingFood.x + dir.x, movingFood.y + dir.y);
 
-    // Przemieszczamy, gdy nowa pozycja jest wewnątrz mapy
+
     if (newPoint.x >= 0 && newPoint.y >= 0 && newPoint.x < WIDTH && newPoint.y < HEIGHT) {
         movingFood = newPoint;
     }
@@ -212,7 +212,7 @@ class GamePanel extends JPanel implements ActionListener, KeyListener {
             Point head = snakeAI.get(0);
             List<Character> possibleDirs = new ArrayList<>(List.of('U','D','L','R'));
 
-            // Odrzucamy kierunek odwrotny
+            
             if (isFirstAI) {
                 if (directionAI1 == 'U') possibleDirs.remove((Character) 'D');
                 if (directionAI1 == 'D') possibleDirs.remove((Character) 'U');
@@ -225,7 +225,7 @@ class GamePanel extends JPanel implements ActionListener, KeyListener {
                 if (directionAI2 == 'R') possibleDirs.remove((Character) 'L');
             }
 
-            // Logika ustawiania nowego kierunku
+            
             if (food != null) {
                 possibleDirs.sort((dir1, dir2) -> {
                 Point next1 = nextPoint(head, dir1);
@@ -333,11 +333,11 @@ class GamePanel extends JPanel implements ActionListener, KeyListener {
 
     private boolean isCollisionWithOther(List<Point> snake, List<Point> other) {
     Point head = snake.get(0);
-    // Kolizja z jakąkolwiek częścią
+    
     if (other.contains(head)) {
         return true;
     }
-    // Dodatkowe sprawdzenie: czołowe zderzenie (head vs head)
+    
     if (other.get(0).equals(head)) {
         return true;
     }
@@ -407,7 +407,7 @@ class GamePanel extends JPanel implements ActionListener, KeyListener {
         //synchronized (lock) {
             //if(que!=0){
                 if (!game_over){
-                // Ruch gracza
+                
                 moveSnake(snake, direction);
                 //que=1;
                 if (isCollision(snake) || isCollisionWithOther(snake, snakeAI1) || isCollisionWithOther(snake, snakeAI2) || isCollisionWithObstacles(snake)) {
@@ -441,7 +441,6 @@ class GamePanel extends JPanel implements ActionListener, KeyListener {
 
 
             // Ruch AI2
-            // Ruch AI2
             if (isAliveAI2) {
                 moveSnake(snakeAI2, directionAI2);
                 if (isCollision(snakeAI2) || isCollisionWithOther(snakeAI2, snake) || isCollisionWithOther(snakeAI2, snakeAI1) || isCollisionWithObstacles(snakeAI2)) {
@@ -456,13 +455,11 @@ class GamePanel extends JPanel implements ActionListener, KeyListener {
             }
 
 
-            // Losowo generujemy nowy typ owocu
             if (!hasMovingFood && new Random().nextInt(100) < 2) {
                 spawnMovingFood();
             }
 
-            // Przemieszczamy „żywy” owoc
-            // Przemieszczamy „żywy” owoc rzadziej
+            
             if (hasMovingFood) {
                 movingFoodMoveCounter++;
                 if (movingFoodMoveCounter >= MOVING_FOOD_INTERVAL) {
@@ -471,12 +468,10 @@ class GamePanel extends JPanel implements ActionListener, KeyListener {
                 }
             }
 
-            // Sprawdzamy zjedzenie „żywego” owocu
-            // Sprawdzamy zjedzenie „żywego” owocu
             if (hasMovingFood) {
                 if (snake.get(0).equals(movingFood)) {
                     hasMovingFood = false;
-                    snake.add(new Point(snake.get(snake.size() - 1))); // Powiększamy gracza
+                    snake.add(new Point(snake.get(snake.size() - 1))); 
                     playerScore+=10;
                 } else if (snakeAI1.get(0).equals(movingFood)) {
                     hasMovingFood = false;
@@ -493,8 +488,7 @@ class GamePanel extends JPanel implements ActionListener, KeyListener {
             Point nextHeadAI2 = nextPoint(snakeAI2.get(0), directionAI2);
 
             if (nextHeadAI1.equals(nextHeadAI2)) {
-                // Kolizja przewidywana: obie głowy zmierzają na to samo pole
-                // Rozwiązanie przykładowe: zmieniamy kierunek AI2 na inny (np. próbujemy 'L')
+                
                 if (directionAI2 != 'L') {
                     directionAI2 ='L'; 
                 } else {
